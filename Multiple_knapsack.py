@@ -46,11 +46,11 @@ class Multiple_knapsack:
         # Using Slices
         matrix=self.matrix[origin[0]:origin[0]+1,origin[1]:origin[1]+size]
         slice=matrix[0]
-        print(slice,np.count_nonzero(slice),len(slice))
         if np.count_nonzero(slice)==0 and len(slice)==size:
             self.matrix[origin[0]:origin[0] + 1, origin[1]:origin[1] + size]=1
             self.score+=puissance
             self.placedServers[origin]=server
+            self.servers.remove(server)
         else :
             print("Impossible de placer le serveur")
 
@@ -59,6 +59,7 @@ class Multiple_knapsack:
         size,puissance=server
         self.score-=puissance
         self.matrix[origin[0]:origin[0] + 1, origin[1]:origin[1] + size]=0
+        self.servers.append(server)
         del self.placedServers[origin]
 
     def getState(self, row, col):
@@ -91,26 +92,30 @@ if __name__ == "__main__":
     # Build the Mutltiple_Knapsack problem according to a source file ( given a filePath )
     problem = Multiple_knapsack("Sources_Files/dcEasy.in")
 
-    # Retrieving server List
-    # print(problem.servers)
+    # Retrieving server List ( remaining one to place on the matrix )
+    print(problem.servers)
 
     # Accessing the Matrix
     # print(problem.matrix.shape)
     # print(problem.matrix[0])  #  Print first line
     # print(problem.matrix[0, 0])  #  Print first case
 
-    # Return the state given the coordinate
-    # print(problem.getState(1, 0))
+    # Return the state given the coordinate     EMPTY = 0    SERVER = 1    UNAVAILABLE = -1
+    print(problem.getState(1, 0))
 
     # Plot the game
     # problem.plot()
 
+    # Place a server on the matrix
     origin=(0,1)
     problem.placeServer(origin,problem.servers[0])
-    # problem.plot()
+    # Now we can print the servers on the racks :
+    print(problem.placedServers)
+    # the remaining one are :
+    print(problem.servers)
 
-    print(problem)
-
-    problem.removeServer(origin)
-    print(problem)
     problem.plot()
+
+    # Summary on the problem :
+    print(problem)
+
