@@ -73,6 +73,22 @@ class Multiple_knapsack:
         else:
             return State.SERVER
 
+    def flat(self):
+        knapSackList=[]
+        for row in self.matrix :
+            index=list(np.argwhere(row==-1))
+            if len(index)>0:
+                index=[x[0] for x in index]
+                index.insert(0,-1)
+                index.append(self.slots)
+                for start,end in zip(index[:-1],index[1:]):
+                    sackSize=end-start-1
+                    if sackSize>0 :
+                        knapSackList.append(sackSize)
+            else :
+                knapSackList.append(self.slots)
+        return knapSackList
+
     def __getitem__(self, key):
         return self.matrix[key]
 
@@ -89,33 +105,39 @@ class Multiple_knapsack:
 
 
 if __name__ == "__main__":
-    # Build the Mutltiple_Knapsack problem according to a source file ( given a filePath )
-    problem = Multiple_knapsack("Sources_Files/dcEasy.in")
+    problem = Multiple_knapsack("Sources_Files/dc.in")
 
-    # Retrieving server List ( remaining one to place on the matrix )
-    print(problem.servers)
-
-    # Accessing the Matrix
-    # print(problem.matrix.shape)
-    # print(problem.matrix[0])  #  Print first line
-    # print(problem.matrix[0, 0])  #  Print first case
-
-    # Return the state given the coordinate     EMPTY = 0    SERVER = 1    UNAVAILABLE = -1
-    print(problem.getState(1, 0))
-
-    # Plot the game
-    # problem.plot()
-
-    # Place a server on the matrix
-    origin=(0,1)
-    problem.placeServer(origin,problem.servers[0])
-    # Now we can print the servers on the racks :
-    print(problem.placedServers)
-    # the remaining one are :
-    print(problem.servers)
+    # problem = Multiple_knapsack("Sources_Files/dcEasy.in")
+    # print(problem.flat())
 
     problem.plot()
-
-    # Summary on the problem :
-    print(problem)
+    # # Build the Mutltiple_Knapsack problem according to a source file ( given a filePath )
+    # problem = Multiple_knapsack("Sources_Files/dcEasy.in")
+    #
+    # # Retrieving server List ( remaining one to place on the matrix )
+    # print(problem.servers)
+    #
+    # # Accessing the Matrix
+    # # print(problem.matrix.shape)
+    # # print(problem.matrix[0])  #  Print first line
+    # # print(problem.matrix[0, 0])  #  Print first case
+    #
+    # # Return the state given the coordinate     EMPTY = 0    SERVER = 1    UNAVAILABLE = -1
+    # print(problem.getState(1, 0))
+    #
+    # # Plot the game
+    # # problem.plot()
+    #
+    # # Place a server on the matrix
+    # origin=(0,1)
+    # problem.placeServer(origin,problem.servers[0])
+    # # Now we can print the servers on the racks :
+    # print(problem.placedServers)
+    # # the remaining one are :
+    # print(problem.servers)
+    #
+    # problem.plot()
+    #
+    # # Summary on the problem :
+    # print(problem)
 
