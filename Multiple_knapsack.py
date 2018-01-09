@@ -107,10 +107,6 @@ class Multiple_knapsack:
 if __name__ == "__main__":
     problem = Multiple_knapsack("Sources_Files/dc.in")
 
-    # problem = Multiple_knapsack("Sources_Files/dcEasy.in")
-    # print(problem.flat())
-
-    problem.plot()
     # # Build the Mutltiple_Knapsack problem according to a source file ( given a filePath )
     # problem = Multiple_knapsack("Sources_Files/dcEasy.in")
     #
