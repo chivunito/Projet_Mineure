@@ -1,8 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from enum import Enum
-
-
 """ Multiple_knapsack (class) :  
 Pour représenter le problème on utilise une matrice (racks x slots) d'integer. Une slot est représenté par : 
     - -1 si la case est indisponible
@@ -106,23 +104,25 @@ class Multiple_knapsack:
 
 if __name__ == "__main__":
     problem = Multiple_knapsack("Sources_Files/dc.in")
+    problem = Multiple_knapsack("Sources_Files/test10x10.in")
 
-    # # Build the Mutltiple_Knapsack problem according to a source file ( given a filePath )
+    # Build the Mutltiple_Knapsack problem according to a source file ( given a filePath )
     # problem = Multiple_knapsack("Sources_Files/dcEasy.in")
-    #
-    # # Retrieving server List ( remaining one to place on the matrix )
+
+    # Retrieving server List ( remaining one to place on the matrix )
     # print(problem.servers)
-    #
-    # # Accessing the Matrix
-    # # print(problem.matrix.shape)
-    # # print(problem.matrix[0])  #  Print first line
-    # # print(problem.matrix[0, 0])  #  Print first case
-    #
+    print(problem.flat())
+
+    # Accessing the Matrix
+    print(problem.matrix.shape)
+    # print(problem.matrix[0])  #  Print first line
+    # print(problem.matrix[0, 0])  #  Print first case
+
     # # Return the state given the coordinate     EMPTY = 0    SERVER = 1    UNAVAILABLE = -1
     # print(problem.getState(1, 0))
     #
     # # Plot the game
-    # # problem.plot()
+    problem.plot()
     #
     # # Place a server on the matrix
     # origin=(0,1)
