@@ -39,8 +39,9 @@ def evaluate(servers, knapsack, individu):
 
 def mutNewKnapSack(individu, knapSackLen, prbFlip):
     for i in range(len(individu)):
-        if random.random() < prbFlip   and individu[i]==-1:
-            individu[i] = random.randint(0, knapSackLen)
+        # if random.random() < prbFlip  :
+        if random.random() < prbFlip and individu[i] == -1:
+                individu[i] = random.randint(0, knapSackLen)
     return (individu,)
 
 
@@ -79,7 +80,7 @@ def validCrossover(ind1, ind2, servers, knapSackList):
 
 
 if __name__=="__main__":
-    None
+    print('ok')
     # problem = Multiple_knapsack("Sources_Files/dcEasy.in")
     # ind1=[1,1,1,-1,-1]
     # ind2=[-1,-1,-1,1,1]
