@@ -104,13 +104,13 @@ class Multiple_knapsack:
 
 if __name__ == "__main__":
     problem = Multiple_knapsack("Sources_Files/dc.in")
-    problem = Multiple_knapsack("Sources_Files/test10x10.in")
+    problem = Multiple_knapsack("Sources_Files/test20x100.in")
 
     # Build the Mutltiple_Knapsack problem according to a source file ( given a filePath )
     # problem = Multiple_knapsack("Sources_Files/dcEasy.in")
 
     # Retrieving server List ( remaining one to place on the matrix )
-    # print(problem.servers)
+    print(len(problem.servers),problem.servers)
     print(problem.flat())
 
     # Accessing the Matrix
