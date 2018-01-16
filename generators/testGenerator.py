@@ -32,6 +32,6 @@ def generateTest(fileName,racks, slots, unavailable, servers, pools=1):
 
 
 if __name__=="__main__":
-    racks=10
-    slots=10
+    racks=20
+    slots=100
     generateTest("test",racks=racks,slots=slots,unavailable=racks*2,servers=racks*slots,pools=1)
