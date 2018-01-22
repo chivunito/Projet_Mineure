@@ -1,6 +1,7 @@
 from deap import base, creator,algorithms
 from geneticAlgorithm.geneticMethod import *
 from Multiple_knapsack import *
+import networkx
 
 def createToolbox(knapSacks, servers):
     creator.create("FitnessMax", base.Fitness, weights=(1.0,))
@@ -22,22 +23,55 @@ def sortServers(servers,lambdaFunction):
     newServers=sorted(servers,key=lambdaFunction)
     return newServers
 
+def scoreModel(servers,knapsacks,cxpb=0.1,mutpb=0.1,popSize=50,nGen=50,verbose=False):
+    toolbox = createToolbox(knapsacks, servers)
+
+    # Create Statistics
+    stats = tools.Statistics(lambda ind: ind.fitness.values)
+    stats.register("avg", np.mean)
+    stats.register("min", np.min)
+    stats.register("max", np.max)
+
+    pop = toolbox.population(n=popSize)
+    pop, logbook = algorithms.eaSimple(pop, toolbox, cxpb=cxpb, mutpb=mutpb, ngen=nGen, verbose=verbose, stats=stats)
+    best = tools.selBest(pop, 1)[0]
+    score=toolbox.evaluate(best)
+    gen, avg, min_, max_ = logbook.select("gen", "avg", "min", "max")
+    return gen,max_,best,score
+
 if __name__=="__main__":
-    problem = Multiple_knapsack("Sources_Files/dc.in")
+    problem = Multiple_knapsack("Sources_Files/test10x10.in")
+    # problem = Multiple_knapsack("Sources_Files/test5x10.in")
     # problem = Multiple_knapsack("Sources_Files/dcEasy.in")
+    # problem.plot()
     knapsacks = problem.flat()
     servers = problem.servers
-    servers=sorted(problem.servers,key=lambda x:-x[1]/x[0])
     # servers=sorted(problem.servers,key=lambda x:-x[1])
-    toolbox=createToolbox(knapsacks,servers)
+    print("Place disponible : ",problem.shape[0]*problem.shape[1]-len(problem.indispo))
+
+    popSize=10
+    nGen=100
+    maxDico={}
+
+    scoreModel(servers, knapsacks, cxpb=0.1, mutpb=0.2)
+
+    # for mutpb in np.linspace(0.05,0.9,10):
+    #     maxDico[mutpb]=scoreModel(servers,knapsacks,cxpb=0.1,mutpb=mutpb)
+
+    plt.plot(gen, avg, label="average")
+    # plt.plot(gen, min_, label="minimum")
+    # plt.plot(gen, max_, label="maximum")
+    # plt.xlabel("Generation")
+    # plt.ylabel("Fitness")
+    # plt.legend(loc="lower right")
+    # plt.show()
 
 
 
-    pop = toolbox.population(n=20)
-    for ind in pop :
-        print(toolbox.evaluate(ind))
-    pop, logbook = algorithms.eaSimple(pop, toolbox, cxpb=0.5, mutpb=0.8, ngen=40, verbose=True)
-    for ind in pop :
-        print(toolbox.evaluate(ind))
-
-# Modifier la mutation
+    # best=tools.selBest(pop,1)[0]
+    # best=np.array(best)
+    # servers=np.array(servers)
+    # # print(servers[best])
+    # serveurRetenus=servers[best>-1]
+    # print(sum(serveurRetenus[:,0]))
+    # print(sum(serveurRetenus[:,1]))

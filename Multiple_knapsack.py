@@ -103,14 +103,13 @@ class Multiple_knapsack:
 
 
 if __name__ == "__main__":
-    problem = Multiple_knapsack("Sources_Files/dc.in")
-    problem = Multiple_knapsack("Sources_Files/test20x100.in")
-
+    problem = Multiple_knapsack("Sources_Files/dcEasy.in")
+    # problem = Multiple_knapsack("Sources_Files/test10x10.in")
     # Build the Mutltiple_Knapsack problem according to a source file ( given a filePath )
     # problem = Multiple_knapsack("Sources_Files/dcEasy.in")
 
     # Retrieving server List ( remaining one to place on the matrix )
-    print(len(problem.servers),problem.servers)
+    # print(problem.servers)
     print(problem.flat())
 
     # Accessing the Matrix
@@ -122,17 +121,22 @@ if __name__ == "__main__":
     # print(problem.getState(1, 0))
     #
     # # Plot the game
-    problem.plot()
-    #
-    # # Place a server on the matrix
-    # origin=(0,1)
-    # problem.placeServer(origin,problem.servers[0])
-    # # Now we can print the servers on the racks :
-    # print(problem.placedServers)
-    # # the remaining one are :
-    # print(problem.servers)
-    #
     # problem.plot()
+    #
+    # Place a server on the matrix
+    origin=(1,0)
+    newServer=[5,5]
+    problem.servers.append(newServer)
+    problem.placeServer(origin,newServer)
+    newServer=[2,5]
+    problem.servers.append(newServer)
+    problem.placeServer((0,1),newServer)
+    # Now we can print the servers on the racks :
+    print(problem.placedServers)
+    # the remaining one are :
+    print(problem.servers)
+
+    problem.plot()
     #
     # # Summary on the problem :
     # print(problem)
