@@ -5,7 +5,7 @@ from config import setup
 setup(Presolve='On', Workers='Auto')
 
 # Build the Mutltiple_Knapsack problem according to a source file ( given a filePath )
-problem = Multiple_knapsack("Sources_Files/dc.in")
+problem = Multiple_knapsack("Sources_Files/test20x100.in")
 mdl = CpoModel()
 
 #x is the list of serv attributions, containing the indices of the rack
@@ -30,7 +30,7 @@ mdl.add(mdl.pack(profits, servsAttribList,
 
 mdl.add(mdl.maximize(mdl.sum(profits[:-1])))
 
-sol = mdl.solve(TimeLimit=60, TimeMode='ElapsedTime', SearchType='Restart', SequenceInferenceLevel='Extended')
+sol = mdl.solve(TimeLimit=300, TimeMode='CPUTime', SearchType='Restart', SequenceInferenceLevel='Extended')
 print("\n--------\n")
 print("Total CPU Power available:", sum(sol[p] for p in profits[:-1]))
 print("Server distributions: {}/{}".format(
