@@ -30,17 +30,15 @@ class Multiple_knapsack:
                 fileList.append(liste)
         self.racks, self.slots, nbIndispos, self.pools, nbServers = fileList.pop(0)
         self.shape=(self.racks,self.slots)
-        self.matrix = np.zeros((self.racks, self.slots))
-
+        self.matrix = np.zeros((self.racks, self.slots),dtype=np.int32)
         self.indispo = fileList[:nbIndispos]
         for rowIndispo, colIndispo in self.indispo:
-            self.matrix[rowIndispo][colIndispo] = -1
+            self.matrix[rowIndispo][colIndispo] = State.UNAVAILABLE.value
 
         self.servers = fileList[nbIndispos:]
 
     def placeServer(self,origin, server):
         size, puissance = server
-
         # Using Slices
         matrix=self.matrix[origin[0]:origin[0]+1,origin[1]:origin[1]+size]
         slice=matrix[0]
@@ -64,9 +62,9 @@ class Multiple_knapsack:
         """ Return true if the coordinate is available
         """
         value=self.matrix[row, col]
-        if value == -1:
+        if value == State.UNAVAILABLE :
             return State.UNAVAILABLE
-        elif value == 0 :
+        elif value == State.EMPTY :
             return State.EMPTY
         else:
             return State.SERVER
@@ -121,7 +119,7 @@ if __name__ == "__main__":
     # print(problem.getState(1, 0))
     #
     # # Plot the game
-    # problem.plot()
+    problem.plot()
     #
     # Place a server on the matrix
     origin=(1,0)

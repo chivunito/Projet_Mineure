@@ -39,8 +39,8 @@ def evaluate(servers, knapsack, individu):
 
 def mutNewKnapSack(individu, knapSackLen, prbFlip):
     for i in range(len(individu)):
-        # if random.random() < prbFlip  :
-        if random.random() < prbFlip and individu[i] == -1:
+        if random.random() < prbFlip  :
+        # if random.random() < prbFlip and individu[i] == -1:
                 individu[i] = random.randint(0, knapSackLen)
     return (individu,)
 

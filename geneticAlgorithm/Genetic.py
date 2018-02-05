@@ -1,6 +1,6 @@
 from deap import base, creator,algorithms
 from geneticAlgorithm.geneticMethod import *
-from Multiple_knapsack import *
+from DataCenter import *
 import networkx
 
 def createToolbox(knapSacks, servers):
@@ -40,7 +40,7 @@ def scoreModel(servers,knapsacks,cxpb=0.1,mutpb=0.1,popSize=50,nGen=50,verbose=F
     return gen,max_,best,score
 
 if __name__=="__main__":
-    problem = Multiple_knapsack("Sources_Files/test10x10.in")
+    problem = Multiple_knapsack("Sources_Files/test10x50.in")
     # problem = Multiple_knapsack("Sources_Files/test5x10.in")
     # problem = Multiple_knapsack("Sources_Files/dcEasy.in")
     # problem.plot()
