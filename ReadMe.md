@@ -16,4 +16,4 @@ Il s'agit de notre projet de mineure qui s'interesse à l'optimisation d'un data
 
 
 
-**Note** : Les modélisations CPP & PLNE sont contenues dans les branches du même nom.
+**Note** : Les modélisations CPP sont contenues dans les branches du même nom.
