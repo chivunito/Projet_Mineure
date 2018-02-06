@@ -6,6 +6,8 @@ Il s'agit de notre projet de mineure qui s'interesse à l'optimisation d'un data
 
 **Method PLNE** : Implémentation de Plne（programmation linéaire en nombres entiers）
 
+**Method PLNE/Test_PLNE.py** : Lancer des test PLNE.
+
 **Generators** : Module de génération des fichiers de tests de DataCenter
 
 **Sources_Files** : Fichiers générés de tests
